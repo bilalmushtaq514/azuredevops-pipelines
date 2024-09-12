@@ -13,6 +13,9 @@ steps:
   inputs:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
+- task: TerraformInstaller@2
+  inputs:
+    terraformVersion: 'latest'
 - script: |
     export PATH=/opt/hostedtoolcache/terraform/1.9.5/x64:$PATH
     terraform --version
