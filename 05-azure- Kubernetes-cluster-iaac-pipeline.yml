@@ -13,31 +13,17 @@ steps:
   inputs:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
-
-- task: TerraformInstaller@2  
+- task: TerraformTaskV2@2
   inputs:
-    terraformVersion: '1.5.5'  
-
-- script: terraform --version
-  displayName: 'Verify Terraform Installation'
-
-- script: |
-    export PATH=/opt/hostedtoolcache/terraform/1.5.5/x64:$PATH
-    terraform --version
-  displayName: 'Update PATH and Verify Terraform Installation'
-  
-- task: TerraformCLI@2 
-  inputs:
+    provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publicKey.secureFilePath)'  # Fixed typo
-    backendType: 'azurerm'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret'
     backendServiceArm: 'azure-resource-manager-service-manager'
-    backendAzureRmSubscriptionId: '0f1d99aa-72a1-4547-8839-a8097480b241'
-    ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
-    backendAzureRmKey: 'kubernetes-dev-tfstate'
+    backendAzureRmKey: 'k8sstorageaccountcontainer''
     allowTelemetryCollection: true
+
+  
