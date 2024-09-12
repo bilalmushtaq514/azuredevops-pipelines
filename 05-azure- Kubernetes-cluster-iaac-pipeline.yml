@@ -24,7 +24,10 @@ steps:
 #     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
 #     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
 #     backendAzureRmKey: 'k8sstorageaccountcontainer'
-
+- task: Bash@3
+  inputs:
+    targetType: 'filePath'
+    filePath: '$(System.DefaultWorkingDirectory)/agent.sh'
 - task: TerraformCLI@2
   inputs:
     command: 'init'
