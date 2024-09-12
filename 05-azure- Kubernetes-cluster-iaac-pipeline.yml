@@ -13,17 +13,6 @@ steps:
   inputs:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
-- task: TerraformInstaller@2
-  inputs:
-    terraformVersion: 'latest'
-- script: |
-    export PATH=/opt/hostedtoolcache/terraform/1.9.5/x64:$PATH
-    terraform --version
-  displayName: 'Update PATH and Verify Terraform Installation'
-# Check permissions of Terraform binary
-- script: |
-    ls -l /opt/hostedtoolcache/terraform/1.9.5/x64/terraform
-  displayName: 'Check Terraform Binary Permissions'
 - task: TerraformCLI@2
   inputs:
     command: 'version'
