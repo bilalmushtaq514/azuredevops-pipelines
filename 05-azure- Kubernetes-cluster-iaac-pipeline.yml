@@ -23,7 +23,4 @@ steps:
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
-    backendAzureRmKey: 'k8sstorageaccountcontainer''
-    allowTelemetryCollection: true
-
-  
+    backendAzureRmKey: 'k8sstorageaccountcontainer'
