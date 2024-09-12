@@ -14,7 +14,7 @@ steps:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
 
-- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0  # Fully qualified task name
+- task: TerraformInstaller@2  # Fully qualified task name
   inputs:
     terraformVersion: '1.5.5'  # Specify a specific stable version
 
@@ -22,7 +22,7 @@ steps:
 - script: terraform --version
   displayName: 'Verify Terraform Installation'
 
-- task: ms-devlabs.custom-terraform-tasks.custom-terraform-cli-task.TerraformCLI@0  # Fully qualified task name
+- task: TerraformCLI@2  # Fully qualified task name
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
