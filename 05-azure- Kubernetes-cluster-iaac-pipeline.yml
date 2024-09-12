@@ -13,6 +13,9 @@ steps:
   inputs:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
 - task: TerraformTaskV2@2
   inputs:
     provider: 'azurerm'
