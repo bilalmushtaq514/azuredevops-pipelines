@@ -21,6 +21,11 @@ steps:
 - script: terraform --version
   displayName: 'Verify Terraform Installation'
 
+- script: |
+    export PATH=/opt/hostedtoolcache/terraform/1.5.5/x64:$PATH
+    terraform --version
+  displayName: 'Update PATH and Verify Terraform Installation'
+  
 - task: TerraformCLI@2 
   inputs:
     command: 'init'
