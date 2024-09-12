@@ -14,15 +14,14 @@ steps:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
 
-- task: TerraformInstaller@2  # Fully qualified task name
+- task: TerraformInstaller@2  
   inputs:
-    terraformVersion: '1.5.5'  # Specify a specific stable version
+    terraformVersion: '1.5.5'  
 
-# Step to verify if Terraform is installed correctly
 - script: terraform --version
   displayName: 'Verify Terraform Installation'
 
-- task: TerraformCLI@2  # Fully qualified task name
+- task: TerraformCLI@2 
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
