@@ -23,7 +23,7 @@ steps:
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
     backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'k8sstorageaccountbilal514'
+    backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
     backendAzureRmKey: 'k8sstorageaccountcontainer'
 # - task: TerraformTaskV3@3
