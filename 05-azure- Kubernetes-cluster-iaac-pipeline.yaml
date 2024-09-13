@@ -19,9 +19,9 @@ steps:
     terraform version
   displayName: 'Check Terraform Installation and Debug Info'
 - script: |
-    curl -fsSL https://apt.HashiCorp.com/gpg | sudo apt-key add -
-    sudo apt-get update && sudo apt-get install -y terraform
-  displayName: 'Install Terraform'  
+    cp $(Pipeline.Workspace)/drop/terraform /usr/local/bin
+  displayName: 'Copy Terraform Binary'
+  condition: always()   
 
 - task: TerraformCLI@2
   inputs:
