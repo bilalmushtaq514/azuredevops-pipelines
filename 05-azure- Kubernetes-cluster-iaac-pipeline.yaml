@@ -15,6 +15,9 @@ steps:
     retryCount: '5'
 - script: |
     which terraform
+    terraform version
+    echo $PATH
+    ls -l /usr/local/bin/terraform
   displayName: 'Check Terraform Installation'
 - task: TerraformCLI@2
   inputs:
