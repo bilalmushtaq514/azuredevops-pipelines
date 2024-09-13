@@ -14,28 +14,28 @@ steps:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
 
-- task: TerraformTaskV3@3
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-    backendServiceArm: 'azure-resource-manager-service-manager'
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
-    backendAzureRmContainerName: 'k8sstorageaccountcontainer'
-    backendAzureRmKey: 'k8sstorageaccountcontainer'
-
-# - task: TerraformCLI@2
+# - task: TerraformTaskV3@3
 #   inputs:
+#     provider: 'azurerm'
 #     command: 'init'
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
 #     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-#     backendType: 'azurerm'
 #     backendServiceArm: 'azure-resource-manager-service-manager'
-#     ensureBackend: true
 #     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-#     backendAzureRmResourceGroupLocation: 'westeurope'
 #     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
 #     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
 #     backendAzureRmKey: 'k8sstorageaccountcontainer'
+
+- task: TerraformCLI@2
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    backendType: 'azurerm'
+    backendServiceArm: 'azure-resource-manager-service-manager'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmResourceGroupLocation: 'westeurope'
+    backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
+    backendAzureRmContainerName: 'k8sstorageaccountcontainer'
+    backendAzureRmKey: 'k8sstorageaccountcontainer'
