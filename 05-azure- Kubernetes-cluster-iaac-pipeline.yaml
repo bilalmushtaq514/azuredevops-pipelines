@@ -22,7 +22,7 @@ steps:
     backendServiceArm: 'azure-resource-manager-service-manager'
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
+    backendAzureRmResourceGroupLocation: 'centralus'
     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
     backendAzureRmKey: 'k8sstorageaccountcontainer'
