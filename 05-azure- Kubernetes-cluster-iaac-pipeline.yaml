@@ -26,14 +26,11 @@ steps:
     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
     backendAzureRmKey: 'k8sstorageaccountcontainer'
-# - task: TerraformTaskV3@3
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'init'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
-#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-#     backendServiceArm: 'azure-resource-manager-service-manager'
-#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-#     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
-#     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
-#     backendAzureRmKey: 'k8sstorageaccountcontainer'
+
+- task: TerraformCLI@2
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+    environmentServiceName: 'azure-resource-manager-service-manager'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+  
