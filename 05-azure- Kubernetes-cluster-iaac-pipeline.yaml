@@ -13,16 +13,6 @@ steps:
   inputs:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
-
-- script: |
-    which terraform
-    terraform version
-  displayName: 'Check Terraform Installation and Debug Info'
-- script: |
-    cp $(Pipeline.Workspace)/terraform /usr/local/bin
-  displayName: 'Copy Terraform Binary'
-  condition: always()   
-
 - task: TerraformCLI@2
   inputs:
     command: 'init'
