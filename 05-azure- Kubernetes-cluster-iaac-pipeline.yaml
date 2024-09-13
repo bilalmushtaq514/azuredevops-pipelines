@@ -19,7 +19,7 @@ steps:
     terraform version
   displayName: 'Check Terraform Installation and Debug Info'
 - script: |
-    cp $(Pipeline.Workspace)/drop/terraform /usr/local/bin
+    cp $(Pipeline.Workspace)/terraform /usr/local/bin
   displayName: 'Copy Terraform Binary'
   condition: always()   
 
