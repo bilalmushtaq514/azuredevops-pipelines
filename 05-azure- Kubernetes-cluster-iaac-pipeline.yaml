@@ -13,25 +13,42 @@ steps:
   inputs:
     secureFile: 'id_rsa.pub'
     retryCount: '5'
+
 - script: |
     which terraform
     terraform version
     echo $PATH
     ls -l /usr/local/bin/terraform
-  displayName: 'Check Terraform Installation'
-- task: TerraformCLI@2
-  inputs:
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-    backendType: 'azurerm'
-    backendServiceArm: 'azure-resource-manager-service-manager'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
-    backendAzureRmContainerName: 'k8sstorageaccountcontainer'
-    backendAzureRmKey: 'k8sstorageaccountcontainer'
+    echo "Debugging information:"
+    env
+    whoami
+    pwd
+  displayName: 'Check Terraform Installation and Debug Info'
+
+- script: |
+    cd $(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes
+    terraform init \
+      -var client_id=$(client_id) \
+      -var client_secret=$(client_secret) \
+      -var ssh_public_key=$(publickey.secureFilePath) \
+      -backend-config="resource_group_name=terraform-backend-rg" \
+      -backend-config="storage_account_name=k8sstorageaccountbilal" \
+      -backend-config="container_name=k8sstorageaccountcontainer" \
+      -backend-config="key=k8sstorageaccountcontainer"
+  displayName: 'Terraform Init'
+# - task: TerraformCLI@2
+#   inputs:
+#     command: 'init'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/Kubernetes'
+#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+#     backendType: 'azurerm'
+#     backendServiceArm: 'azure-resource-manager-service-manager'
+#     ensureBackend: true
+#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
+#     backendAzureRmResourceGroupLocation: 'westeurope'
+#     backendAzureRmStorageAccountName: 'k8sstorageaccountbilal'
+#     backendAzureRmContainerName: 'k8sstorageaccountcontainer'
+#     backendAzureRmKey: 'k8sstorageaccountcontainer'
 # - task: TerraformTaskV3@3
 #   inputs:
 #     provider: 'azurerm'
