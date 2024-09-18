@@ -16,3 +16,9 @@ steps:
     backendServiceAWS: 'AWS-Connection'
     backendAWSBucketName: 'terraform-backend-state-bilal'
     backendAWSKey: 'bilal514'
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'aws'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes'
+    environmentServiceNameAWS: 'AWS-Connection'
