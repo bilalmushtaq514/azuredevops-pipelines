@@ -32,20 +32,31 @@ module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-3f7b2563", "subnet-4a7d6a45"] #CHANGE
+  subnet_ids            = ["subnet-0d4fde29d4f3de1d6", "subnet-08415e171b4f4e366"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
   #vpc_id         = "vpc-1234556abcdef"
 
-  node_groups = [
-    {
-      instance_type = "t2.micro"
-      max_capacity  = 5
-      desired_capacity = 3
-      min_capacity  = 3
+  # node_groups = [
+  #   {
+  #     instance_type = "t2.micro"
+  #     max_capacity  = 5
+  #     desired_capacity = 3
+  #     min_capacity  = 3
+  #   }
+  # ]
+    eks_managed_node_group_defaults = {
+    instance_types = ["t2.micro"]
+  }
+
+  eks_managed_node_groups = {
+    example = {
+      min_size     = 3
+      max_size     = 5
+      desired_size = 3
     }
-  ]
+  }
 }
 
 data "aws_eks_cluster" "cluster" {
@@ -60,6 +71,8 @@ data "aws_eks_cluster_auth" "cluster" {
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
 # ServiceAccount needs permissions to create deployments 
 # and services in default namespace
+# terraform-backend-state-bilal
+
 resource "kubernetes_cluster_role_binding" "example" {
   metadata {
     name = "fabric8-rbac"
