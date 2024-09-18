@@ -28,7 +28,7 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   token                  = data.aws_eks_cluster_auth.cluster.token
-  version                = "~> 2.32"
+  #version                = "~> 2.32"
 }
 
 module "in28minutes-cluster" {
@@ -93,6 +93,15 @@ resource "kubernetes_cluster_role_binding" "example" {
 }
 
 # Needed to set the default region
+terraform {
+  required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.32"
+    }
+  }
+}
+
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"  # Specify the AWS region here
 }
