@@ -51,7 +51,7 @@ module "in28minutes-cluster" {
   #   }
   # ]
     eks_managed_node_group_defaults = {
-    instance_types = ["t2.micro"]
+    instance_types = ["t3.medium"]
   }
 
   eks_managed_node_groups = {
