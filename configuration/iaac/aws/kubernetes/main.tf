@@ -96,7 +96,7 @@ resource "kubernetes_cluster_role_binding" "example" {
 resource "kubernetes_secret" "example" {
   metadata {
     annotations = {
-      "kubernetes.io/service-account.name" = kubernetes_cluster_role_binding.example.subject.ServiceAccount
+      "kubernetes.io/service-account.name" = kubernetes_cluster_role_binding.example.subject[0].name
     }
 
     generate_name = "my-service-account-token"
