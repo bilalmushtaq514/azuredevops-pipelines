@@ -13,7 +13,7 @@ steps:
     provider: 'aws'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes'
-    backendServiceAWS: 'AWS-Connection'
+    backendServiceAWS: 'AWS-EKS-Connection'
     backendAWSBucketName: 'terraform-backend-state-bilal'
     backendAWSKey: 'bilal514'
 - task: TerraformTaskV4@4
@@ -21,4 +21,4 @@ steps:
     provider: 'aws'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes'
-    environmentServiceNameAWS: 'AWS-Connection'
+    environmentServiceNameAWS: 'AWS-EKS-Connection'
