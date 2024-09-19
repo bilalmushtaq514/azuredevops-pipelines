@@ -93,6 +93,19 @@ resource "kubernetes_cluster_role_binding" "example" {
   }
 }
 
+resource "kubernetes_secret" "example" {
+  metadata {
+    annotations = {
+      "kubernetes.io/service-account.name" = kubernetes_cluster_role_binding.example.subject.ServiceAccount
+    }
+
+    generate_name = "my-service-account-token"
+  }
+
+  type                           = "kubernetes.io/service-account-token"
+  wait_for_service_account_token = true
+}
+
 # Needed to set the default region
 terraform {
   required_providers {
